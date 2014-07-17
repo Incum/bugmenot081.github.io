@@ -1,1 +1,107 @@
-<p>Test</p>
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>My Ionic</title>
+    <link href="http://code.ionicframework.com/1.0.0-beta.8/css/ionic.min.css" rel="stylesheet">
+    <script src="http://code.ionicframework.com/1.0.0-beta.8/js/ionic.bundle.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.1/iscroll-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
+      <ion-nav-back-button class="button button-icon icon ion-ios7-arrow-back"></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    <script id="templates/home.html" type="text/ng-template">
+      <ion-view title="" hide-nav-bar="true">
+        <ion-content has-tabs="false" padding="true" scroll="false" class="ob-index">
+          <div class="row">
+            <div class="col col-20"></div>
+            <div class="col">
+              <a class="button button-block button-energized icon-left ion-ios7-information" href="#/list">
+                <span>List</span>
+              </a>
+              <a class="button button-block button-balanced icon-left ion-ios7-lightbulb" href="#/about">
+                <span>About App</span>
+              </a>
+            </div>
+            <div class="col col-20"></div>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="templates/list.html" type="text/ng-template">
+      <ion-view title="List">
+        <ion-content padding="false">
+          <ion-list>
+            <ion-item ng-repeat="item in items" class="item-button-right">
+              <span>Hello, {{item.label}}!</span>
+              <span class="button button-balanced button-history">
+                <i class="icon ion-arrow-graph-up-right"></i>
+               </span>
+              <a class="button button-energized" href="#/view/{{item.link}}">
+                <i class="icon ion-chevron-right"></i>
+              </a>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="templates/view.html" type="text/ng-template">
+       <ion-view title="View">
+         <ion-content padding="false" scroll="false" class="view-ctn">
+           <ion-slide-box show-pager="false" delegate-handle="ViewCtrlNS" on-slide-changed="onSlideChanged($index)">
+             <!--<ion-slide ob-vscroll style="position:relative">-->
+             <ion-slide ob-vscroll><div>
+               <div class="box blue"><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1></div>
+               <div class="box blue"><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1></div>
+               <div class="box blue"><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1></div>
+             </div></ion-slide>
+             <ion-slide ob-vscroll>
+               <div class="box yellow"><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1></div>
+               <div class="box yellow"><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1></div>
+             </ion-slide>
+             <ion-slide ob-vscroll>
+               <div class="box pink"><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1><h1>{{pid}}, slide</h1></div>
+             </ion-slide>
+           </ion-slide-box>
+         </ion-content>
+         <ion-footer-bar align-title="left" class="bar-assertive">
+           <div class="buttons">
+             <button class="button button-icon ion-arrow-left-a" ng-click="sbGoPrev()"></button>
+           </div>
+           <h1 class="title">Slide {{sbCurrentIndex()+1}}</h1>
+           <div class="buttons">
+             <button class="button button-icon ion-arrow-right-a" ng-click="sbGoNext()"></button>
+           </div>
+         </ion-footer-bar>
+       </ion-view>
+    </script>
+    <script id="templates/about.html" type="text/ng-template">
+      <ion-view title="About">
+        <ion-nav-bar class="bar-royal">
+          <ion-nav-back-button class="button button-icon icon ion-ios7-arrow-back"></ion-nav-back-button>
+          <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-ios7-close-outline">
+            </button>
+          </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-tabs tabs-style="tabs-icon-top" tabs-type="tabs-positive">
+          <ion-tab title="Tab 1" icon-on="ion-ios7-lightbulb" icon-off="ion-ios7-lightbulb-outline">
+			     <ion-header-bar type="bar-positive" title="Tab 1"></ion-header-bar>
+            <ion-content padding="true">
+              Tab 1 Content here...
+            </ion-content>
+          </ion-tab>
+          <ion-tab title="Tab 2" icon-on="ion-ios7-information" icon-off="ion-ios7-information-outline">
+			     <ion-header-bar type="bar-positive" title="Tab 2"></ion-header-bar>
+            <ion-content padding="true">
+              Tab 2 Content here...
+            </ion-content>
+          </ion-tab>
+        </ion-tabs>
+      </ion-view>
+    </script>
+  </body>
+</html>
