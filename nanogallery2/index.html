@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://unpkg.com/nanogallery2/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+		<link href="css/default.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/js/mui.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/angular/mui-angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://unpkg.com/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
+		<script src="js/main.js"></script>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('pageCtrl', function($scope) {
+				$scope.developer = "bugmenot081";
+				$scope.galleryName = "Default";
+				$scope.navigateTo = function() {
+					$scope.galleryName = "Default 2";
+				};
+			});
+		</script>
+	</head>
+	<body ng-app="myApp" ng-controller="pageCtrl">
+		<div id="sidedrawer" class="mui--no-user-select">
+			<div id="sidedrawer-brand" class="mui--appbar-line-height">
+				<span class="mui--text-title">Brand.io</span>
+			</div>
+			<div class="mui-divider"></div>
+			<ul>
+				<li><strong>Category 1</strong>
+					<ul>
+						<li><a href="#" ng-click="navigateTo()">Item 1</a></li>
+						<li><a href="#" ng-click="navigateTo()">Item 2</a></li>
+					</ul>
+				</li>
+				<li><strong>Category 2</strong>
+					<ul>
+						<li><a href="#">Item 1</a></li>
+						<li><a href="#">Item 2</a></li>
+					</ul>
+				</li>
+				<li><strong>Category 3</strong>
+					<ul>
+						<li><a href="#">Item 1</a></li>
+						<li><a href="#">Item 2</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<header id="header">
+			<div class="mui-appbar mui--appbar-line-height">
+				<div class="mui-container-fluid">
+					<a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
+					<a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
+					<span class="mui--text-title mui--visible-xs-inline-block mui--visible-sm-inline-block">Brand.io</span>
+				</div>
+			</div>
+		</header>
+		<div id="content-wrapper">
+			<div class="mui--appbar-height"></div>
+			<mui-container fluid="">
+				<h1>
+					{{galleryName}}
+				</h1>
+				<div data-nanogallery2='{
+																"itemsBaseURL": "http://nanogallery2.nanostudio.org/samples/",
+																"thumbnailWidth": "auto"
+																}'>
+					<a href="" data-ngkind="album" data-ngid="1" data-ngthumb="berlin1t.jpg">Album A</a>
+					<a href="berlin1.jpg" data-ngid="10" data-ngalbumid="1" data-ngthumb="berlin1t.jpg">Image 1 / album A</a>
+					<a href="berlin2.jpg" data-ngid="11" data-ngalbumid="1" data-ngthumb="berlin2t.jpg">Image 2 / album A</a>
+					<a href="berlin1.jpg" data-ngthumb="berlin1t.jpg" data-ngdesc="">Berlin 1</a>
+					<a href="berlin2.jpg" data-ngthumb="berlin2t.jpg" data-ngdesc="">Berlin 2</a>
+					<a href="berlin3.jpg" data-ngthumb="berlin3t.jpg" data-ngdesc="">Berlin 3</a>
+				</div>
+			</mui-container>
+		</div>
+		<footer id="footer">
+			<div class="mui-container-fluid"><br />
+				Made by <a href="https://www.muicss.com" target="_blank">muicss.com</a> |
+				&nbsp;Hosted @<a href="https://bugmenot081.github.io/" target="_blank">GitHub</a> |
+				&nbsp;Develop by {{developer}}
+			</div>
+		</footer>
+	</body>
+</html>

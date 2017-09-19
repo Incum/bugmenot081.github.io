@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://unpkg.com/nanogallery2/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+		<link href="css/default.css" rel="stylesheet" type="text/css" />
+		<style>
+			img { max-width: 100% }
+		</style>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/js/mui.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/angular/mui-angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-storage/0.0.15/angular-storage.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://unpkg.com/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
+		<script src="js/main.js"></script>
+		<script>
+			// https://scotch.io/tutorials/angular-routing-using-ui-router
+			var app = angular.module('myApp', ['mui', 'ui.router', 'angular-storage']);
+			app.config(function($stateProvider, $urlRouterProvider) {
+				$urlRouterProvider.otherwise('/home');
+
+				$stateProvider
+					.state('home', { // HOME STATES AND NESTED VIEWS ===================================
+						url: '/home',
+						templateUrl: 'html-template/home.html'
+					})
+					.state('gallery', { // HOME STATES AND NESTED VIEWS ===================================
+						url: '/gallery/:gid/:albumid',
+						templateUrl: 'html-template/gallery.html',
+						controller: function($scope, $http, $stateParams, $location, $window, store) {
+							$scope.gid = $stateParams.gid;
+							$scope.albumid = $stateParams.albumid;
+							store.set('gid', $stateParams.gid);
+							store.set('albumid', $stateParams.albumid);
+							$location.path('/home').replace();
+							$window.location.href = 'view-gallery.html';
+						}
+					})
+					.state('about', { // ABOUT PAGE AND MULTIPLE NAMED VIEWS ===========================
+						url: '/about',
+						template: '<h3>Its the UI-Router hello world app!</h3>'
+					});
+			});
+			app.controller('pageCtrl', function($scope, $http) {
+// 				$scope.developer = "bugmenot081";
+// 				$scope.galleryName = "Default";
+// 				$scope.navigateTo = function() {
+// 					$scope.galleryName = "Default 2";
+// 				};
+
+//         $http.get('data-sources/paultan-20170919-bmw-.json')
+//           .then(function(res) {
+// 					});
+			});
+		</script>
+	</head>
+	<body ng-app="myApp" ng-controller="pageCtrl">
+		<mui-appbar>
+		</mui-appbar>
+		<mui-container fluid="">
+			<!--<a ui-sref="home">Home</a><a ui-sref="about">About</a>-->
+			<ui-view></ui-view>
+		</mui-container>
+	</body>
+</html>
