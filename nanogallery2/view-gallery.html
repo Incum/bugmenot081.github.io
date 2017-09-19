@@ -20,9 +20,7 @@
 			// https://scotch.io/tutorials/angular-routing-using-ui-router
 			var app = angular.module('myApp', ['mui', 'ui.router', 'angular-storage']);
 			app.controller('pageCtrl', function($scope, $http, store) {
-				console.log(store.get('gid'));
-				console.log(store.get('albumid'));
-				$http.get('data-sources/' + store.get('albumid') + '.json')
+				$http.get('data-sources/' + store.get('gid') + '/' + store.get('albumid') + '.json')
 				.then(function(res) {
 					$("#my_nanogallery2").nanogallery2(res.data);
 				});
