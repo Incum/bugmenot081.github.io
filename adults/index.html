@@ -28,7 +28,7 @@
 				$stateProvider
 					.state('home', { // HOME STATES AND NESTED VIEWS ===================================
 						url: '/home',
-						templateUrl: 'html-template/home.html'
+						templateUrl: 'html-template/home2.html'
 					})
 					.state('gallery', { // HOME STATES AND NESTED VIEWS ===================================
 						url: '/gallery/:gid/:albumid',
@@ -47,7 +47,7 @@
 						template: '<h3>Its the UI-Router hello world app!</h3>'
 					});
 			});
-			app.controller('pageCtrl', function($scope, $http) {
+			app.controller('pageCtrl', function($scope, $http, $location) {
 // 				$scope.developer = "bugmenot081";
 // 				$scope.galleryName = "Default";
 // 				$scope.navigateTo = function() {

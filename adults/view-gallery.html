@@ -26,8 +26,13 @@
 				.then(function(res) {
 					$("#my_nanogallery2").nanogallery2(res.data);
 				});
+
+				var hasBlankPage = (history.length===3)
 				$scope.$back = function() {
-					window.history.back();
+					if(hasBlankPage)
+						history.go(-(history.length - 2));
+					else
+						history.go(-(history.length - 1));
 				};
 			});
 		</script>
