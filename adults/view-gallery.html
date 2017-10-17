@@ -20,17 +20,25 @@
 			// https://scotch.io/tutorials/angular-routing-using-ui-router
 			var app = angular.module('myApp', ['mui', 'ui.router', 'angular-storage']);
 			app.controller('pageCtrl', function($scope, $http, store) {
-				console.log(store.get('gid'));
-				console.log(store.get('albumid'));
+// 				console.log(store.get('gid'));
+// 				console.log(store.get('albumid'));
 				$http.get('data-sources/' + store.get('albumid') + '.json')
 				.then(function(res) {
 					$("#my_nanogallery2").nanogallery2(res.data);
 				});
+				$scope.$back = function() {
+					window.history.back();
+				};
 			});
 		</script>
 	</head>
 	<body ng-app="myApp" ng-controller="pageCtrl">
 		<mui-appbar>
+			<table width="100%"><tr style="vertical-align:middle;">
+				<td class="mui--appbar-height">
+					<span ng-click="$back()">Back</span>
+				</td>
+			</tr></table>
 		</mui-appbar>
 		<mui-container fluid="">
 			<div id="my_nanogallery2"></div>
