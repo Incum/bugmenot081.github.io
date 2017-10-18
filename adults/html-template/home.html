@@ -1,0 +1,16 @@
+<!-- https://github.com/muicss/mui/issues/162 -->
+<mui-row class="d-flex" ng-repeat="galleriesForRow in galleries">
+	<mui-col md="{{galleriesForRow.grid}}" class="d-flex" ng-repeat="galleriesForRow in galleriesForRow">
+		<div class="mui--card mui--z1">
+			<img src="{{galleriesForRow.img}}" />
+			<div class="label">
+			<div>{{galleriesForRow.gid}}</div>
+			<div>{{galleriesForRow.albumid}}</div>
+			</div>
+			<a class="mui-btn mui-btn--flat mui-btn--accent"
+				 ui-sref="gallery({gid: '{{galleriesForRow.gid}}', albumid: '{{galleriesForRow.albumid}}'})">
+				Explore
+			</a>
+		</div>
+	</mui-col>
+</mui-row>

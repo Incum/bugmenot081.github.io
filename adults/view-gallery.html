@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-storage/0.0.15/angular-storage.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.1.1/sprintf.min.js"></script>
 		<script type="text/javascript" src="https://unpkg.com/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
 		<script src="js/main.js"></script>
 		<script>
@@ -22,9 +23,23 @@
 			app.controller('pageCtrl', function($scope, $http, store) {
 // 				console.log(store.get('gid'));
 // 				console.log(store.get('albumid'));
-				$http.get('data-sources/' + store.get('albumid') + '.json')
+				$scope.gid = store.get('gid');
+				$scope.albumid = store.get('albumid');
+
+				$http.get('data-sources/' + store.get('gid') + '/' + store.get('albumid') + '.json')
 				.then(function(res) {
-					$("#my_nanogallery2").nanogallery2(res.data);
+					var albumJson = res.data;
+					var albumItems = albumJson.items;
+					var titleFormat = '%0' + albumItems.length.toString().length + 's';
+					$scope.albumTotalImg = albumItems.length;
+
+					for(var i = albumItems.length-1; i>=0; i--) {
+						var albumItem = albumItems[i];
+						if(!albumItem.hasOwnProperty("title")) {
+							albumItem.title = sprintf(titleFormat, (i+1));
+						}
+					}
+					$("#my_nanogallery2").nanogallery2(albumJson);
 				});
 
 				var hasBlankPage = (history.length===3)
@@ -40,8 +55,16 @@
 	<body ng-app="myApp" ng-controller="pageCtrl">
 		<mui-appbar>
 			<table width="100%"><tr style="vertical-align:middle;">
-				<td class="mui--appbar-height">
+				<td class="mui--appbar-height" width="15%">
 					<span ng-click="$back()">Back</span>
+				</td>
+				<td class="mui--appbar-height mui--text-center" width="70%">
+					<div class="mui--align-top">{{gid}}</div>
+    <div width="33%" class="mui--align-bottom">{{albumid}}</div>
+					
+				</td>
+				<td class="mui--appbar-height mui--text-right" width="15%">
+					{{albumTotalImg}} images
 				</td>
 			</tr></table>
 		</mui-appbar>

@@ -7,7 +7,10 @@
 		<link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/css/mui.min.css" rel="stylesheet" type="text/css" />
 		<link href="https://unpkg.com/nanogallery2/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
-		<link href="css/default2.css" rel="stylesheet" type="text/css" />
+		<link href="css/default.css" rel="stylesheet" type="text/css" />
+		<style>
+			img { max-width: 100% }
+		</style>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/js/mui.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.24/angular/mui-angular.min.js"></script>
@@ -25,23 +28,7 @@
 				$stateProvider
 					.state('home', { // HOME STATES AND NESTED VIEWS ===================================
 						url: '/home',
-						templateUrl: 'html-template/home.html',
-						controller: function($scope, $http, $stateParams, $location, $window, store) {
-							$http.get('data-sources/galleries.json')
-								.then(function(res) {
-									var galleries = res.data.items;
-									var galleriesMatrix = [], i, k;
-									for (i=0, k=-1; i<galleries.length; i++) {
-										if (galleries[i].hasOwnProperty("newrow")) {
-											k++;
-											galleriesMatrix[k] = [];
-										}
-										galleriesMatrix[k].push(galleries[i]);
-									}
-									$scope.galleries = galleriesMatrix;
-// 									console.log(matrix);
-								});
-						}
+						templateUrl: 'html-template/home-old.html'
 					})
 					.state('gallery', { // HOME STATES AND NESTED VIEWS ===================================
 						url: '/gallery/:gid/:albumid',
@@ -54,9 +41,22 @@
 							$location.path('/home').replace();
 							$window.location.href = 'view-gallery.html';
 						}
+					})
+					.state('about', { // ABOUT PAGE AND MULTIPLE NAMED VIEWS ===========================
+						url: '/about',
+						template: '<h3>Its the UI-Router hello world app!</h3>'
 					});
 			});
 			app.controller('pageCtrl', function($scope, $http, $location) {
+// 				$scope.developer = "bugmenot081";
+// 				$scope.galleryName = "Default";
+// 				$scope.navigateTo = function() {
+// 					$scope.galleryName = "Default 2";
+// 				};
+
+//         $http.get('data-sources/paultan-20170919-bmw-.json')
+//           .then(function(res) {
+// 					});
 			});
 		</script>
 	</head>
