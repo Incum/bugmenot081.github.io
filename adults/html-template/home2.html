@@ -2,7 +2,7 @@
 <mui-row class="d-flex" ng-repeat="galleriesForRow in galleries">
 	<mui-col md="{{galleriesForRow.grid}}" class="d-flex" ng-repeat="galleriesForRow in galleriesForRow">
 		<div class="mui--card mui--z1">
-			<img src="https://res.cloudinary.com/bugmenot081/image/fetch/w_480/{{galleriesForRow.img}}" />
+			<img src="{{getThumbLocation(galleriesForRow.img)}}" />
 			<div class="label">
 			<div>{{galleriesForRow.gid}}</div>
 			<div>{{galleriesForRow.albumid}}</div>

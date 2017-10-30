@@ -25,7 +25,7 @@
 				$stateProvider
 					.state('home', { // HOME STATES AND NESTED VIEWS ===================================
 						url: '/home',
-						templateUrl: 'html-template/home.html',
+						templateUrl: 'html-template/home2.html',
 						controller: function($scope, $http, $stateParams, $location, $window, store) {
 							$http.get('data-sources/galleries.json')
 								.then(function(res) {
@@ -41,6 +41,11 @@
 									$scope.galleries = galleriesMatrix;
 // 									console.log(matrix);
 								});
+							$scope.getThumbLocation = function(thumbOrigin) {
+								if(thumbOrigin.startsWith("~"))
+									return thumbOrigin.substring(1, thumbOrigin.length);
+								return "https://res.cloudinary.com/bugmenot081/image/fetch/w_480/"+thumbOrigin;
+							}
 						}
 					})
 					.state('gallery', { // HOME STATES AND NESTED VIEWS ===================================
