@@ -25,7 +25,7 @@
 				$stateProvider
 					.state('home', { // HOME STATES AND NESTED VIEWS ===================================
 						url: '/home',
-						templateUrl: 'html-template/home2.html',
+						templateUrl: 'html-template/home.html',
 						controller: function($scope, $http, $stateParams, $location, $window, store) {
 							$http.get('data-sources/galleries.json')
 								.then(function(res) {
